@@ -1,4 +1,20 @@
+import { useEffect, useState } from "react";
+
 const Home = () => {
+    const [tasks, setTasks] = useState([]);
+    const [input, setInput] = useState("");
+    
+
+    // useEffect(()=>{
+    //     console.log(tasks);
+    // },[tasks]);
+    const handleAdd = () => {
+        if (input.trim() !== "") {
+            setTasks([...tasks, input]);
+            setInput("");
+        }
+    };
+
     return <div className="p-2 w-screen flex flex-col items-center justify-center gap-5">
         <h1 className="text-4xl font-extrabold">To Do Application</h1>
         <div className="bg-gray-100">
@@ -12,11 +28,23 @@ const Home = () => {
                     </div>
                     
                     <div className="p-3 flex flex-row gap-2">
-                        <input type="text" placeholder="task" className="p-2 border border-gray-400 rounded-md"/>
-                        <div className="p-2 border border-gray-600 rounded-md bg-blue-700 text-white cursor-pointer hover:text-black hover:bg-white"><span>add</span></div>
+                        <input type="text"
+                        value={input}
+                        onChange={(e)=>setInput(e.target.value)}
+                        placeholder="task" className="p-2 border border-gray-400 rounded-md"/>
+                        <div className="p-2 border border-gray-600 rounded-md bg-blue-700 text-white cursor-pointer hover:text-black hover:bg-white"
+                        onClick={handleAdd}><span>add</span></div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div>
+            <span>Tasks</span>
+            <ol>
+                {tasks.map((task, index) => (
+                    <li key={index}>{task}</li>
+                ))}
+            </ol>
         </div>
     </div>
 }
