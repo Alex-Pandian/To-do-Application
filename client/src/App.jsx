@@ -1,5 +1,9 @@
-function App(){
-  return <h1 className="text-[30px]">Hello world</h1>
+import Home from "./pages/home";
+
+const App = () => {
+  return <>
+    <Home/>
+  </>
 }
 
 export default App;
