@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 const Home = () => {
     const [tasks, setTasks] = useState([]);
-    const [input, setInput] = useState("");
+    const [input, setInput] = useState({ title: '', description: '' });
 
     // useEffect(()=>{
     //     console.log(tasks);
@@ -10,13 +10,13 @@ const Home = () => {
     const handleAdd = () => {
         if (input.trim() !== "") {
             setTasks([...tasks, input]);
-            setInput("");
+            setInput({ title: '', description: '' });
         }
     };
 
     return <div className="w-screen flex flex-col items-center justify-center gap-5">
-        <div className="p-3 bg-white border-b border-b-gray-400 w-full ">
-            <h1 className="text-4xl font-extrabold">To Do Application</h1>
+        <div className="p-3 bg-white border-b border-b-gray-400 shadow shadow-gray-500 w-full ">
+            <h1 className="text-4xl font-extrabold">TO DO APPLICATION</h1>
         </div>
         
         <div className="bg-gray-100">
@@ -29,11 +29,26 @@ const Home = () => {
                         <span className="text-2xl font-bold">Add Task</span>
                     </div>
                     
-                    <div className="p-3 flex flex-row gap-2">
-                        <input type="text"
-                        value={input}
-                        onChange={(e)=>setInput(e.target.value)}
-                        placeholder="task" className="p-2 border border-gray-400 rounded-md"/>
+                    <div className="p-3 flex flex-col items-center gap-2">
+                        <div className="flex flex-col gap-2">
+                            <div className="flex flex-row justify-end">
+                                <label className="p-2">Title</label>
+                                <input type="text"
+                                value={input.title}
+                                onChange={(e) => (setInput({...input, title:e.target.value }))}
+                                placeholder="title" 
+                                className="p-2 border border-gray-400 rounded-md"/>
+                            </div>
+                            <div className="flex flex-row justify-end">
+                                <label className="p-2">Description</label>
+                                <textarea
+                                    value={input.description}
+                                    onChange={(e) => (setInput({...input, description:e.target.value }))}
+                                    placeholder="give description"
+                                    className="p-2 border border-gray-400 rounded-md"
+                                />
+                            </div>
+                        </div>
                         <div className="p-2 border border-gray-600 rounded-md bg-blue-700 text-white cursor-pointer hover:text-black hover:bg-white"
                         onClick={handleAdd}><span>add</span></div>
                     </div>
