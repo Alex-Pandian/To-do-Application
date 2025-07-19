@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 const Home = () => {
     const [tasks, setTasks] = useState([]);
     const [input, setInput] = useState("");
-    
 
     // useEffect(()=>{
     //     console.log(tasks);
@@ -15,8 +14,11 @@ const Home = () => {
         }
     };
 
-    return <div className="p-2 w-screen flex flex-col items-center justify-center gap-5">
-        <h1 className="text-4xl font-extrabold">To Do Application</h1>
+    return <div className="w-screen flex flex-col items-center justify-center gap-5">
+        <div className="p-3 bg-white border-b border-b-gray-400 w-full ">
+            <h1 className="text-4xl font-extrabold">To Do Application</h1>
+        </div>
+        
         <div className="bg-gray-100">
             <div className="flex flex-col justify-center items-center border border-gray-300 rounded-md shadow-2xl">
                 <div className="px-15 py-10">
@@ -48,6 +50,5 @@ const Home = () => {
         </div>
     </div>
 }
-
 
 export default Home;
