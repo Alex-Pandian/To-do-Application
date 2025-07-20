@@ -1,24 +1,34 @@
 import { useEffect, useState } from "react";
+import axios from 'axios';
 
 const Home = () => {
-    const [tasks, setTasks] = useState([]);
-    const [input, setInput] = useState({ title: '', description: '' });
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
 
     // useEffect(()=>{
     //     console.log(tasks);
     // },[tasks]);
-    const handleAdd = () => {
-        if (input.trim() !== "") {
-            setTasks([...tasks, input]);
-            setInput({ title: '', description: '' });
+    const handleAdd = async (e) => {
+        e.preventDefault();
+        if (title.trim() !== "" && description.trim() !== "") {
+            try{
+                const res = await axios.post('http://localhost:8000/api/task/add',{
+                    title,
+                    description,
+                });
+                alert("Successfully added");
+                console.log(res.data.message);
+            }
+            catch(error){
+                console.error("Error adding task : ",error);
+            }
+            setTitle('');
+            setDescription('');
         }
     };
 
-    return <div className="w-screen flex flex-col items-center justify-center gap-5">
-        <div className="p-3 bg-white border-b border-b-gray-400 shadow shadow-gray-500 w-full ">
-            <h1 className="text-4xl font-extrabold">TO DO APPLICATION</h1>
-        </div>
-        
+    return <div className="w-screen p-3 flex flex-col items-center justify-center gap-5">
+      
         <div className="bg-gray-100">
             <div className="flex flex-col justify-center items-center border border-gray-300 rounded-md shadow-2xl">
                 <div className="px-15 py-10">
@@ -34,34 +44,26 @@ const Home = () => {
                             <div className="flex flex-row justify-end">
                                 <label className="p-2">Title</label>
                                 <input type="text"
-                                value={input.title}
-                                onChange={(e) => (setInput({...input, title:e.target.value }))}
+                                value={title}
+                                onChange={(e) => (setTitle(e.target.value))}
                                 placeholder="title" 
                                 className="p-2 border border-gray-400 rounded-md"/>
                             </div>
                             <div className="flex flex-row justify-end">
                                 <label className="p-2">Description</label>
                                 <textarea
-                                    value={input.description}
-                                    onChange={(e) => (setInput({...input, description:e.target.value }))}
+                                    value={description}
+                                    onChange={(e) => (setDescription(e.target.value))}
                                     placeholder="give description"
                                     className="p-2 border border-gray-400 rounded-md"
                                 />
                             </div>
                         </div>
-                        <div className="p-2 border border-gray-600 rounded-md bg-blue-700 text-white cursor-pointer hover:text-black hover:bg-white"
-                        onClick={handleAdd}><span>add</span></div>
+                        <button type="submit" className="p-2 border border-gray-600 rounded-md bg-blue-700 text-white cursor-pointer hover:text-black hover:bg-white"
+                        onClick={handleAdd}><span>add</span></button>
                     </div>
                 </div>
             </div>
-        </div>
-        <div>
-            <span>Tasks</span>
-            <ol>
-                {tasks.map((task, index) => (
-                    <li key={index}>{task}</li>
-                ))}
-            </ol>
         </div>
     </div>
 }
