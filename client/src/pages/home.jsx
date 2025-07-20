@@ -42,7 +42,7 @@ const Home = () => {
                     <div className="p-3 flex flex-col items-center gap-2">
                         <div className="flex flex-col gap-2">
                             <div className="flex flex-row justify-end">
-                                <label className="p-2">Title</label>
+                                <label className="p-2 font-bold">Title</label>
                                 <input type="text"
                                 value={title}
                                 onChange={(e) => (setTitle(e.target.value))}
@@ -50,7 +50,7 @@ const Home = () => {
                                 className="p-2 border border-gray-400 rounded-md"/>
                             </div>
                             <div className="flex flex-row justify-end">
-                                <label className="p-2">Description</label>
+                                <label className="p-2 font-bold">Description</label>
                                 <textarea
                                     value={description}
                                     onChange={(e) => (setDescription(e.target.value))}

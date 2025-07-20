@@ -1,11 +1,10 @@
 const Task = require('../models/taskModel');
 
-exports.deleteTask = async (req, res) => {
+exports.getTask = async (req, res) => {
     console.log(req.body);
-    const { id } = req.body;
     try{
-        await Task.deleteOne({ _id: id });
-        res.status(204).end();
+        const tasks = await Task.find();
+        res.json(tasks);
     }
     catch(error){
         res.status(500).send('Server error');
