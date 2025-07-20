@@ -12,7 +12,7 @@ const Home = () => {
         e.preventDefault();
         if (title.trim() !== "" && description.trim() !== "") {
             try{
-                const res = await axios.post('http://localhost:8000/api/task/add',{
+                const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/task/add`,{
                     title,
                     description,
                 });
